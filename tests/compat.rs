@@ -228,6 +228,13 @@ fn bare_cr_kept_as_field_content() {
 }
 
 #[test]
+fn trailing_cr_before_eof_dropped() {
+    // Go drops a single trailing \r when the last line has no \n; normalize_crlf
+    // (csvio 0.3.1) mirrors that so an unterminated final \r isn't kept as content.
+    assert_golden(&["-f", "n>0"], "trailcr.csv", "trailcr.out");
+}
+
+#[test]
 fn mid_stream_error_emits_no_partial_output() {
     // csvtk's buffered writer never flushes on a mid-stream fatal (Go's os.Exit
     // skips the deferred Flush), so a ragged row leaves stdout empty even though
