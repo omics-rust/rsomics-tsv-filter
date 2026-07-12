@@ -1,0 +1,34 @@
+[package]
+name = "rsomics-tsv-filter"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.91"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/omics-rust/rsomics-tsv-filter"
+authors = ["Zane Leong <efd@live.com>"]
+description = "Filter CSV/TSV rows by an arithmetic condition on selected fields — csvtk filter port"
+readme = "README.md"
+categories = ["science", "command-line-utilities"]
+keywords = ["csv", "tsv", "filter", "bioinformatics", "csvtk"]
+
+[[bin]]
+name = "rsomics-tsv-filter"
+path = "src/main.rs"
+
+[lib]
+name = "rsomics_tsv_filter"
+path = "src/lib.rs"
+
+doctest = false
+
+[dependencies]
+rsomics-common = { version = "0.6" }
+rsomics-help = { version = "0.3" }
+rsomics-csvio = { version = "0.2" }
+clap = { version = "4", features = ["derive"] }
+csv = "1"
+regex = "1"
+serde = { version = "1", features = ["derive"] }
+
+[dev-dependencies]
+tempfile = "3"
