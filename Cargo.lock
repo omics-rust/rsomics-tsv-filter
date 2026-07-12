@@ -386,10 +386,11 @@ dependencies = [
 
 [[package]]
 name = "rsomics-csvio"
-version = "0.2.0"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6ebb3534345f41c49c2d90fbabd3d1c0433095fe808c9c10f7617c727fb7cce8"
+checksum = "481e10d64e387fee1511a10b35ca537987571e270b52bb2b89c05fa5d6c0a607"
 dependencies = [
+ "csv",
  "rsomics-common",
 ]
 
@@ -407,7 +408,7 @@ dependencies = [
 
 [[package]]
 name = "rsomics-tsv-filter"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "clap",
  "csv",

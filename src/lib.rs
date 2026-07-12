@@ -4,7 +4,7 @@ mod filter;
 use std::io::{Read, Write};
 
 use rsomics_common::{Result, RsomicsError};
-use rsomics_csvio::{CsvWriter, check_strict, normalize_crlf};
+use rsomics_csvio::{CsvWriter, check_strict, go_reader_builder, normalize_crlf};
 
 pub struct FilterOptions {
     /// Raw `-f/--filter` condition, e.g. `age>12`, `1,3<=2`, `c*!=0`.
@@ -50,11 +50,7 @@ pub fn filter(input: &str, opts: &FilterOptions, out: &mut dyn Write) -> Result<
         check_strict(&data, opts.in_delim, opts.comment)?;
     }
 
-    let mut reader = csv::ReaderBuilder::new()
-        .delimiter(opts.in_delim)
-        .comment(opts.comment)
-        .flexible(opts.ignore_illegal_row)
-        .has_headers(false)
+    let mut reader = go_reader_builder(opts.in_delim, opts.comment, opts.ignore_illegal_row)
         .from_reader(&data[..]);
 
     // Stage output in memory and flush only after the whole input parses

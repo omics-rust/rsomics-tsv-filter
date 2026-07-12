@@ -94,6 +94,7 @@ csvtk filter -F --any -f "c*>25"  cols.csv       # fuzzy_any.out
 csvtk filter -n -f "age>26"       cmt.csv        # cmt_ln.out
 csvtk filter -I -f "1>0"          ragged.csv     # ragged_ign.out
 csvtk filter -l -f "1>0"          barequote.csv  # barequote_lz.out
+csvtk filter -f "n>0"             barecr.csv     # barecr.out
 ```
 
 This crate is an independent Rust reimplementation of `csvtk filter`,

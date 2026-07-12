@@ -220,6 +220,14 @@ fn crlf_in_quoted_field_normalized() {
 }
 
 #[test]
+fn bare_cr_kept_as_field_content() {
+    // Go's csv reader ends records only on \n, so a bare \r (not \r\n) is field
+    // content; go_reader_builder pins Terminator::Any(b'\n') to match — the csv
+    // crate's default would split the record on the lone \r.
+    assert_golden(&["-f", "n>0"], "barecr.csv", "barecr.out");
+}
+
+#[test]
 fn mid_stream_error_emits_no_partial_output() {
     // csvtk's buffered writer never flushes on a mid-stream fatal (Go's os.Exit
     // skips the deferred Flush), so a ragged row leaves stdout empty even though
